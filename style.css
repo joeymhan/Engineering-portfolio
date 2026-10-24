@@ -3,7 +3,7 @@
 :root {
   --paper: #ffffff;
   --ink: #000000;
-  --muted: #4d5b6e;
+  --muted: #6b7280;
   --line: #c9d4df;
   --accent: #000000;
   --gold: #b8963e;
@@ -38,13 +38,22 @@ a:focus-visible, .btn:focus-visible {
 }
 
 .sub-links {
-  margin: 0.75rem 0 0;
+  margin: 1rem 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.85rem;
   font-size: 0.95rem;
-  color: #000000;
+  color: var(--muted);
 }
 
 .sub-links a {
-  color: #000000;
+  color: var(--muted);
+  transition: color 0.15s;
+}
+
+.sub-links a:hover {
+  color: var(--ink);
 }
 
 /* Header */
@@ -261,6 +270,4 @@ h3 {
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .arc { animation: none; stroke-dashoffset: 0; }
-  .dot { animation: none; opacity: 1; }
-}
+  .arc { animation: none; stroke-
