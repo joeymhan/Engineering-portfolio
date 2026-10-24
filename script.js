@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // 2. Automatically sync the active page indicator in the navbar
-  const isProjectsPage = window.location.pathname.includes("/projects");
+  const isProjectsPage = /\/projects(\/|$)/.test(window.location.pathname);
   const currentPage = isProjectsPage ? "projects" : "home";
 
   document.querySelectorAll(".site-nav .nav-link").forEach((link) => {
