@@ -40,8 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
   resize();
   window.addEventListener("resize", resize);
 
-  const COUNT = 6;         // number of rockets
-  const MAX_TURN = 0.006;  // smaller = wider, lazier turns
+  const COUNT = 4;         // number of rockets
+  const MAX_TURN = 0.012;  // smaller = wider, lazier turns
   const STEER = 0.002;     // smaller = smoother, straighter paths
   const TRAIL_LENGTH = 70; // longer = longer trail
   const MARGIN = 40;
@@ -162,4 +162,23 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
+})();
+
+// 4. Night mode toggle (remembers your choice)
+(function () {
+  const root = document.documentElement;
+  const btn = document.getElementById("theme-toggle");
+  if (!btn) return;
+
+  function sync() {
+    btn.setAttribute("aria-pressed", root.dataset.theme === "dark" ? "true" : "false");
+  }
+  sync();
+
+  btn.addEventListener("click", () => {
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    root.dataset.theme = next;
+    try { localStorage.setItem("theme", next); } catch (e) {}
+    sync();
+  });
 })();
