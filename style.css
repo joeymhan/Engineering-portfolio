@@ -63,6 +63,7 @@ a:focus-visible {
 }
 
 .site-nav {
+  grid-column: 3;
   justify-self: end;
   display: flex;
   align-items: center;
@@ -102,23 +103,31 @@ a:focus-visible {
 
 /* Night mode toggle */
 .theme-toggle {
-  justify-self: start;
+  position: absolute;
+  top: 0.5rem;
+  left: 0.6rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 1.6rem;
+  height: 1.6rem;
   padding: 0;
-  border: 1px solid var(--line);
+  border: 0;
   border-radius: 999px;
   background: transparent;
-  color: var(--ink);
+  color: var(--muted);
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
+  transition: color 0.15s, background 0.15s;
+}
+
+.theme-toggle svg {
+  width: 14px;
+  height: 14px;
 }
 
 .theme-toggle:hover {
-  border-color: var(--ink);
+  color: var(--ink);
+  background: color-mix(in srgb, var(--ink) 10%, transparent);
 }
 
 .theme-toggle:focus-visible {
