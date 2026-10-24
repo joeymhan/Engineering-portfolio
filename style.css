@@ -1,19 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
 
 :root {
   --paper: #ffffff;
-  --ink: #142033;
+  --ink: #000000;
   --muted: #4d5b6e;
   --line: #c9d4df;
-  --accent: #1f5fbf;
+  --accent: #000000;
   --gold: #b8963e;
-  --display: "DM Sans", sans-serif;
-  --body: "DM Sans", sans-serif;
+  --display: "EB Garamond", Georgia, serif;
+  --body: "EB Garamond", Georgia, serif;
 }
 
 * {
   box-sizing: border-box;
-  font-family: "DM Sans", sans-serif;
+  font-family: "EB Garamond", Georgia, serif;
 }
 
 html { scroll-behavior: smooth; }
@@ -27,11 +27,24 @@ body {
   line-height: 1.6;
 }
 
-a { color: var(--accent); text-underline-offset: 3px; }
+a {
+  color: #000000;
+  text-underline-offset: 3px;
+}
 
 a:focus-visible, .btn:focus-visible {
   outline: 3px solid var(--gold);
   outline-offset: 3px;
+}
+
+.sub-links {
+  margin: 0.75rem 0 0;
+  font-size: 0.95rem;
+  color: #000000;
+}
+
+.sub-links a {
+  color: #000000;
 }
 
 /* Header */
@@ -53,7 +66,7 @@ a:focus-visible, .btn:focus-visible {
   font-weight: 800;
   font-size: clamp(3rem, 8vw, 5.5rem);
   line-height: 1.05;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   color: var(--ink);
   text-decoration: none;
   text-align: center;
@@ -72,17 +85,18 @@ a:focus-visible, .btn:focus-visible {
   padding-bottom: 0.25rem;
   font-family: var(--display);
   font-weight: 600;
+  font-size: 1rem;
   color: var(--muted);
   text-decoration: none;
   transition: color 0.15s;
 }
 
 .nav-link:hover {
-  color: var(--ink);
+  color: #000000;
 }
 
 .nav-link[aria-current="page"] {
-  color: var(--ink);
+  color: #000000;
   font-weight: 700;
 }
 
@@ -92,8 +106,8 @@ a:focus-visible, .btn:focus-visible {
   left: 0;
   right: 0;
   bottom: -2px;
-  height: 3px;
-  background: var(--accent);
+  height: 2px;
+  background: #000000;
   border-radius: 999px;
 }
 
@@ -238,22 +252,6 @@ h3 {
 }
 
 .site-footer p { margin: 0; }
-
-.footer-links {
-  list-style: none;
-  margin: 0 0 0.75rem;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-.footer-links a {
-  font-weight: 600;
-  color: var(--ink);
-}
-
-.footer-links a:hover { color: var(--accent); }
 
 /* Small screens */
 @media (max-width: 520px) {
