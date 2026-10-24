@@ -3,60 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Joey Han | Portfolio</title>
-  <meta name="description" content="Joey Han, first-year engineering student at Purdue heading into aerospace.">
+  <title>Projects | Joey Han</title>
+  <meta name="description" content="Projects by Joey Han, first-year engineering student at Purdue.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
   <header class="site-header">
-    <a class="brand" href="#top">Joey Han</a>
-    <nav aria-label="Main">
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <span class="header-spacer" aria-hidden="true"></span>
+    <a class="brand" href="../">Joey Han</a>
+    <a class="nav-link" href="./" aria-current="page">Projects</a>
   </header>
 
-  <main id="top">
-
-    <section class="hero">
-      <svg class="trajectory" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-        <path class="arc" d="M-20 590 C 300 590, 520 120, 1220 60" pathLength="1"/>
-        <circle class="dot" cx="1220" cy="60" r="7"/>
-      </svg>
-      <div class="hero-inner">
-        <h1>Joey Han</h1>
-        <p class="lede">First-year engineering student building toward a career in aerospace.</p>
-        <div class="actions">
-          <a class="btn primary" href="#about">About me</a>
-          <a class="btn" href="#contact">Get in touch</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="block">
-      <h2>About</h2>
-      <div class="prose">
-        <p>I'm a first-year at Purdue planning to study aerospace engineering. My coursework so far is a mix of Python programming, physics, and team design projects, and I like the moment when a messy problem turns into a model that predicts something real.</p>
-      </div>
-      <dl class="facts">
-        <div><dt>School</dt><dd>Purdue University</dd></div>
-        <div><dt>Focus</dt><dd>Aerospace engineering</dd></div>
-        <div><dt>Tools</dt><dd>Python, Colab, Git</dd></div>
-      </dl>
-    </section>
-
-    <section id="contact" class="block">
-      <h2>Contact</h2>
-      <p class="prose">Want to collaborate or ask about a project? Reach out.</p>
-      <ul class="links">
-        <li><a href="mailto:your-email@example.com">your-email@example.com</a></li>
-      </ul>
-    </section>
-
+  <main class="block">
+    <h1 class="page-title">Projects</h1>
+    <ul class="projects">
+      <li>
+        <h3>The Martian Greenhouse</h3>
+        <p>Team project for ENGR 13100: designing a controller for a greenhouse on Mars. Replace this line with what you built and what you learned.</p>
+        <a href="#">Read more</a>
+      </li>
+      <li>
+        <h3>Energy conservation analysis</h3>
+        <p>Physics work in Python notebooks, modeling energy in motion. Replace this line with your own summary.</p>
+        <a href="#">Read more</a>
+      </li>
+      <li>
+        <h3>Your next project</h3>
+        <p>Add a short description, the tools you used, and a link to the code or write-up.</p>
+        <a href="#">Read more</a>
+      </li>
+    </ul>
   </main>
 
   <footer class="site-footer">
