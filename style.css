@@ -217,20 +217,27 @@ h2 {
   margin: 0 0 0.5rem;
 }
 
-/* Footer */
+/* Footer Divider & Footer */
+.footer-divider {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
 .site-footer {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 2rem clamp(1.25rem, 5vw, 4rem);
-  border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: 0.95rem;
   text-align: center;
 }
 
 .site-footer p {
+  width: 100%;
   margin: 0;
   text-align: center;
 }
@@ -239,4 +246,13 @@ h2 {
 @media (max-width: 680px) {
   .split-section {
     grid-template-columns: 1fr;
-    gap: 1.5
+    gap: 1.5rem;
+    padding-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
