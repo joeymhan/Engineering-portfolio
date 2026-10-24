@@ -43,6 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const COUNT = 4;         // number of rockets
   const MAX_TURN = 0.012;  // smaller = wider, lazier turns
   const STEER = 0.002;     // smaller = smoother, straighter paths
+  const AVOID_RADIUS = 80; // how close rockets get before steering apart
+  const AVOID_FORCE = 0.08; // higher = sharper dodging
+  const MIN_GAP = 16;      // rockets never get closer than this
   const TRAIL_LENGTH = 70; // longer = longer trail
   const MARGIN = 40;
 
@@ -147,6 +150,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const dt = Math.min((now - last) / 16.67, 3);
     last = now;
     ctx.clearRect(0, 0, w, h);
+
+    // keep rockets from colliding: steer away from any rocket ahead, then enforce a minimum gap
+    for (let i = 0; i < rockets.length; i++) {
+      for (let j = 0; j < rockets.length; j++) {
+        if (i === j) continue;
+        const r = rockets[i], o = rockets[j];
+        const dx = o.x - r.x, dy = o.y - r.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist === 0 || dist > AVOID_RADIUS) continue;
+
+        let diff = Math.atan2(dy, dx) - r.angle;
+        diff = Math.atan2(Math.sin(diff), Math.cos(diff)); // normalize to -PI..PI
+        if (Math.abs(diff) < Math.PI * 0.6) {
+          const away = diff >= 0 ? -1 : 1;
+          r.angle += away * (1 - dist / AVOID_RADIUS) * AVOID_FORCE * dt;
+        }
+
+        if (j > i && dist < MIN_GAP) {
+          const push = (MIN_GAP - dist) / 2;
+          const nx = dx / dist, ny = dy / dist;
+          r.x -= nx * push; r.y -= ny * push;
+          o.x += nx * push; o.y += ny * push;
+        }
+      }
+    }
 
     for (const r of rockets) {
       // gentle random steering
