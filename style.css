@@ -29,6 +29,24 @@ body {
   line-height: 1.6;
 }
 
+/* Background Tintin Rocket Canvas */
+.rocket-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.site-header,
+.block,
+.footer-divider,
+.site-footer {
+  position: relative;
+  z-index: 1;
+}
+
 a {
   color: var(--ink);
   text-underline-offset: 3px;
@@ -254,5 +272,8 @@ h2 {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  .rocket-canvas {
+    display: none;
   }
 }
