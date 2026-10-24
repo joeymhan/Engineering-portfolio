@@ -157,7 +157,7 @@ a:focus-visible {
   grid-template-columns: minmax(280px, 34rem) 1fr;
   gap: 3rem;
   margin-top: 4rem;
-  padding-left: clamp(2rem, 8vw, 7rem);
+  padding-left: clamp(0.5rem, 2.5vw, 2rem);
   align-items: start;
 }
 
@@ -220,6 +220,9 @@ h2 {
 /* Footer */
 .site-footer {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 2rem clamp(1.25rem, 5vw, 4rem);
   border-top: 1px solid var(--line);
   color: var(--muted);
@@ -228,7 +231,7 @@ h2 {
 }
 
 .site-footer p {
-  margin: 0 auto;
+  margin: 0;
   text-align: center;
 }
 
@@ -236,13 +239,4 @@ h2 {
 @media (max-width: 680px) {
   .split-section {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding-left: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-}
+    gap: 1.5
