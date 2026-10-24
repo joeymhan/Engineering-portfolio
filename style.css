@@ -104,8 +104,9 @@ a:focus-visible {
 /* Night mode toggle */
 .theme-toggle {
   position: absolute;
-  top: 0.5rem;
-  left: 0.6rem;
+  top: 50%;
+  left: clamp(1.25rem, 5vw, 4rem);
+  transform: translateY(calc(-50% - 0.125rem));
   display: inline-flex;
   align-items: center;
   justify-content: center;
