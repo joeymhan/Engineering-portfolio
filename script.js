@@ -40,8 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
   resize();
   window.addEventListener("resize", resize);
 
-  const COUNT = 4;         // number of rockets
-  const MAX_TURN = 0.012;  // smaller = wider, lazier turns
+  const COUNT = 6;         // number of rockets
+  const MAX_TURN = 0.006;  // smaller = wider, lazier turns
   const STEER = 0.002;     // smaller = smoother, straighter paths
   const TRAIL_LENGTH = 70; // longer = longer trail
   const MARGIN = 40;
