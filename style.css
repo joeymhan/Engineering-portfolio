@@ -105,7 +105,7 @@ a:focus-visible {
 .theme-toggle {
   position: absolute;
   top: 50%;
-  left: clamp(1.25rem, 5vw, 4rem);
+  left: 0.6rem;
   transform: translateY(calc(-50% - 0.125rem));
   display: inline-flex;
   align-items: center;
@@ -284,6 +284,7 @@ h2 {
 
 .site-footer {
   width: 100%;
+  background: var(--paper);
   display: flex;
   justify-content: center;
   align-items: center;
