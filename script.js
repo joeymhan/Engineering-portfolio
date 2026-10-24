@@ -41,6 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", resize);
 
   const COUNT = 4;         // number of rockets
+  const MAX_TURN = 0.012;  // smaller = wider, lazier turns
+  const STEER = 0.002;     // smaller = smoother, straighter paths
   const TRAIL_LENGTH = 70; // longer = longer trail
   const MARGIN = 40;
 
@@ -57,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const t = r.trail;
     for (let i = 1; i < t.length; i++) {
       const k = i / t.length;
-      ctx.strokeStyle = "rgba(0, 0, 0," + (k * 0.35).toFixed(3) + ")";
+      ctx.strokeStyle = "rgba(250, 204, 21," + (k * 0.85).toFixed(3) + ")";
       ctx.lineWidth = 0.4 + k * 2;
       ctx.lineCap = "round";
       ctx.beginPath();
@@ -85,15 +87,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // fins
     ctx.fillStyle = "#c81e1e";
     ctx.beginPath();
-    ctx.moveTo(-5, -2);
-    ctx.lineTo(-8, -5);
-    ctx.lineTo(-2, -2);
+    ctx.moveTo(-4, -2);
+    ctx.lineTo(-10, -7.5);
+    ctx.lineTo(-1, -2);
     ctx.closePath();
     ctx.fill();
     ctx.beginPath();
-    ctx.moveTo(-5, 2);
-    ctx.lineTo(-8, 5);
-    ctx.lineTo(-2, 2);
+    ctx.moveTo(-4, 2);
+    ctx.lineTo(-10, 7.5);
+    ctx.lineTo(-1, 2);
     ctx.closePath();
     ctx.fill();
 
@@ -137,8 +139,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     for (const r of rockets) {
       // gentle random steering
-      r.turn += (Math.random() - 0.5) * 0.006 * dt;
-      r.turn = Math.max(-0.03, Math.min(0.03, r.turn));
+      r.turn += (Math.random() - 0.5) * STEER * dt;
+      r.turn = Math.max(-MAX_TURN, Math.min(MAX_TURN, r.turn));
       r.angle += r.turn * dt;
       r.x += Math.cos(r.angle) * r.speed * dt;
       r.y += Math.sin(r.angle) * r.speed * dt;
