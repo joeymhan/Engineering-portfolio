@@ -88,16 +88,16 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.fillStyle = "#c81e1e";
     ctx.beginPath();
     ctx.moveTo(-1, -2);
-    ctx.lineTo(-4, -8);
-    ctx.lineTo(-10, -8);
-    ctx.lineTo(-6, -2);
+    ctx.lineTo(-3, -4.5);
+    ctx.lineTo(-8, -4.5);
+    ctx.lineTo(-5, -2);
     ctx.closePath();
     ctx.fill();
     ctx.beginPath();
     ctx.moveTo(-1, 2);
-    ctx.lineTo(-4, 8);
-    ctx.lineTo(-10, 8);
-    ctx.lineTo(-6, 2);
+    ctx.lineTo(-3, 4.5);
+    ctx.lineTo(-8, 4.5);
+    ctx.lineTo(-5, 2);
     ctx.closePath();
     ctx.fill();
 
