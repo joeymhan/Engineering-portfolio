@@ -38,7 +38,7 @@ a:focus-visible, .btn:focus-visible {
 }
 
 .sub-links {
-  margin: 1rem 0 0;
+  margin: 1.75rem 0 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,7 +72,7 @@ a:focus-visible, .btn:focus-visible {
 
 .brand {
   font-family: var(--display);
-  font-weight: 800;
+  font-weight: 400;
   font-size: clamp(3rem, 8vw, 5.5rem);
   line-height: 1.05;
   letter-spacing: -0.02em;
@@ -162,7 +162,7 @@ a:focus-visible, .btn:focus-visible {
 h1 {
   margin: 0;
   font-family: var(--display);
-  font-weight: 800;
+  font-weight: 400;
   font-size: clamp(3.5rem, 12vw, 8rem);
   line-height: 0.95;
   letter-spacing: -0.03em;
@@ -253,6 +253,27 @@ h3 {
 
 /* Footer */
 .site-footer {
+  width: 100%;
   padding: 2rem clamp(1.25rem, 5vw, 4rem);
   border-top: 1px solid var(--line);
-  color: v
+  color: var(--muted);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Small screens */
+@media (max-width: 520px) {
+  .hero { min-height: 80vh; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .arc { animation: none; stroke-dashoffset: 0; }
+  .dot { animation: none; opacity: 1; }
+}
