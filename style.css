@@ -9,6 +9,15 @@
   --body: "DM Sans", "Helvetica Neue", Arial, sans-serif;
 }
 
+html[data-theme="dark"] {
+  --paper: #0f1218;
+  --ink: #f3f4f6;
+  --muted: #9ca3af;
+  --line: #2a303b;
+  --accent: #f3f4f6;
+  color-scheme: dark;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -89,6 +98,44 @@ a:focus-visible {
   height: 2px;
   background: var(--ink);
   border-radius: 999px;
+}
+
+/* Night mode toggle */
+.theme-toggle {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.theme-toggle:hover {
+  border-color: var(--ink);
+}
+
+.theme-toggle:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.theme-toggle .icon-sun {
+  display: none;
+}
+
+html[data-theme="dark"] .theme-toggle .icon-moon {
+  display: none;
+}
+
+html[data-theme="dark"] .theme-toggle .icon-sun {
+  display: block;
 }
 
 /* Layout & Typography */
