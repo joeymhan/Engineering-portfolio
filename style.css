@@ -57,10 +57,15 @@ a:focus-visible, .btn:focus-visible {
 /* Split layout for left-aligned About Me */
 .split-section {
   display: grid;
-  grid-template-columns: 1.25fr 1fr;
+  grid-template-columns: minmax(280px, 34rem) 1fr;
   gap: 3rem;
   margin-top: 4rem;
   align-items: start;
+}
+
+.about-me p {
+  font-family: var(--display);
+  font-size: 1.25rem;
 }
 
 /* Header */
@@ -266,24 +271,4 @@ h3 {
   border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: 0.95rem;
-  text-align: center;
-}
-
-.site-footer p {
-  margin: 0 auto;
-  text-align: center;
-}
-
-/* Small screens */
-@media (max-width: 680px) {
-  .split-section {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-}
-
-@media (max-width: 520px) {
-  .hero { min-height: 80vh; }
-}
-
-/* Respect reduced
+ 
