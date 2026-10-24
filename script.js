@@ -130,6 +130,15 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.arc(0.5, 0, 1, 0, Math.PI * 2);
     ctx.fill();
 
+    // third fin, seen edge-on (a thin line down the middle of the back)
+    ctx.strokeStyle = "#c81e1e";
+    ctx.lineWidth = 1;
+    ctx.lineCap = "butt";
+    ctx.beginPath();
+    ctx.moveTo(-7, 0);
+    ctx.lineTo(-1.5, 0);
+    ctx.stroke();
+
     ctx.restore();
   }
 
