@@ -1,51 +1,22 @@
-function startSite() {
-  // 1. Automatically keep the footer copyright year current
+document.addEventListener("DOMContentLoaded", () => {
+  // 1. Update footer year
   const yearEl = document.getElementById("current-year");
   if (yearEl) {
     yearEl.textContent = new Date().getFullYear();
   }
 
-  // 2. Automatically sync the active page indicator in the navbar
-  const isProjectsPage = window.location.pathname.includes("/projects");
-  const currentPage = isProjectsPage ? "projects" : "home";
-
-  document.querySelectorAll(".site-nav .nav-link").forEach((link) => {
-    if (link.dataset.page === currentPage) {
-      link.setAttribute("aria-current", "page");
-    } else {
-      link.removeAttribute("aria-current");
-    }
-  });
-
-  // 3. Always launch the Tintin Rockets
+  // 2. Launch background Tintin rockets
   initTintinRockets();
-}
-
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", startSite);
-} else {
-  startSite();
-}
+});
 
 function initTintinRockets() {
-  // Prevent duplicate canvases if script runs twice
-  if (document.querySelector(".rocket-canvas")) return;
+  if (document.getElementById("tintin-rocket-canvas")) return;
 
   const canvas = document.createElement("canvas");
-  canvas.className = "rocket-canvas";
+  canvas.id = "tintin-rocket-canvas";
   canvas.setAttribute("aria-hidden", "true");
-
-  // Apply positioning directly in JS so cached CSS never hides the canvas
-  Object.assign(canvas.style, {
-    position: "fixed",
-    top: "0",
-    left: "0",
-    width: "100vw",
-    height: "100vh",
-    pointerEvents: "none",
-    zIndex: "5",
-  });
-
+  canvas.style.cssText =
+    "position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;";
   document.body.appendChild(canvas);
 
   const ctx = canvas.getContext("2d");
@@ -64,97 +35,89 @@ function initTintinRockets() {
   window.addEventListener("resize", resize);
   resize();
 
-  class TintinRocket {
-    constructor(spawnInside = false) {
+  class Rocket {
+    constructor(spawnInside) {
       this.reset(spawnInside);
     }
 
-    reset(spawnInside = false) {
+    reset(spawnInside) {
       const pad = 60;
-
       if (spawnInside) {
-        this.x = width * (0.15 + Math.random() * 0.7);
-        this.y = height * (0.15 + Math.random() * 0.7);
+        this.x = width * (0.2 + Math.random() * 0.6);
+        this.y = height * (0.2 + Math.random() * 0.6);
         this.angle = Math.random() * Math.PI * 2;
       } else {
         const edge = Math.floor(Math.random() * 4);
         if (edge === 0) {
           this.x = -pad;
           this.y = Math.random() * height;
-          this.angle = (Math.random() - 0.5) * 0.9;
+          this.angle = (Math.random() - 0.5) * 0.8;
         } else if (edge === 1) {
           this.x = width + pad;
           this.y = Math.random() * height;
-          this.angle = Math.PI + (Math.random() - 0.5) * 0.9;
+          this.angle = Math.PI + (Math.random() - 0.5) * 0.8;
         } else if (edge === 2) {
           this.x = Math.random() * width;
           this.y = height + pad;
-          this.angle = -Math.PI / 2 + (Math.random() - 0.5) * 0.9;
+          this.angle = -Math.PI / 2 + (Math.random() - 0.5) * 0.8;
         } else {
           this.x = Math.random() * width;
           this.y = -pad;
-          this.angle = Math.PI / 2 + (Math.random() - 0.5) * 0.9;
+          this.angle = Math.PI / 2 + (Math.random() - 0.5) * 0.8;
         }
       }
 
-      this.speed = 1.8 + Math.random() * 1.0;
+      this.speed = 1.6 + Math.random() * 0.8;
       this.turnRate = (Math.random() - 0.5) * 0.01;
       this.turnTimer = 0;
-      this.scale = 0.65 + Math.random() * 0.2;
+      this.scale = 0.6;
       this.trail = [];
-      this.maxTrail = 75;
+      this.maxTrail = 60;
     }
 
     update() {
       this.turnTimer++;
       if (this.turnTimer > 80) {
-        this.turnRate = (Math.random() - 0.5) * 0.014;
+        this.turnRate = (Math.random() - 0.5) * 0.012;
         this.turnTimer = 0;
       }
       this.angle += this.turnRate;
-
       this.x += Math.cos(this.angle) * this.speed;
       this.y += Math.sin(this.angle) * this.speed;
 
-      const tailOffset = 18 * this.scale;
-      const tailX = this.x - Math.cos(this.angle) * tailOffset;
-      const tailY = this.y - Math.sin(this.angle) * tailOffset;
-
+      const tailX = this.x - Math.cos(this.angle) * 16 * this.scale;
+      const tailY = this.y - Math.sin(this.angle) * 16 * this.scale;
       this.trail.push({ x: tailX, y: tailY });
       if (this.trail.length > this.maxTrail) {
         this.trail.shift();
       }
 
-      const bound = 120;
       if (
-        this.x < -bound ||
-        this.x > width + bound ||
-        this.y < -bound ||
-        this.y > height + bound
+        this.x < -120 ||
+        this.x > width + 120 ||
+        this.y < -120 ||
+        this.y > height + 120
       ) {
         this.reset(false);
       }
     }
 
     draw(ctx) {
-      // 1. Draw fading trail
       if (this.trail.length > 2) {
         for (let i = 1; i < this.trail.length; i++) {
           const p0 = this.trail[i - 1];
           const p1 = this.trail[i];
-          const progress = i / this.trail.length;
-
+          const ratio = i / this.trail.length;
           ctx.beginPath();
           ctx.moveTo(p0.x, p0.y);
           ctx.lineTo(p1.x, p1.y);
-          ctx.strokeStyle = `rgba(214, 40, 40, ${progress * 0.35})`;
-          ctx.lineWidth = progress * 5 * this.scale;
+          ctx.strokeStyle = `rgba(214, 40, 40, ${ratio * 0.3})`;
+          ctx.lineWidth = ratio * 4 * this.scale;
           ctx.lineCap = "round";
           ctx.stroke();
         }
       }
 
-      // 2. Draw Tintin Rocket
       ctx.save();
       ctx.translate(this.x, this.y);
       ctx.rotate(this.angle);
@@ -164,30 +127,21 @@ function initTintinRockets() {
       const white = "#ffffff";
       const dark = "#1a1a1a";
 
-      // Flickering exhaust flame
-      const flameLen = 20 + Math.random() * 8;
+      // Flame
+      const flame = 18 + Math.random() * 6;
       ctx.beginPath();
-      ctx.moveTo(-14, -3.5);
-      ctx.lineTo(-flameLen, 0);
-      ctx.lineTo(-14, 3.5);
+      ctx.moveTo(-14, -3);
+      ctx.lineTo(-flame, 0);
+      ctx.lineTo(-14, 3);
       ctx.closePath();
       ctx.fillStyle = "#f77f00";
       ctx.fill();
 
-      ctx.beginPath();
-      ctx.moveTo(-14, -1.8);
-      ctx.lineTo(-flameLen * 0.7, 0);
-      ctx.lineTo(-14, 1.8);
-      ctx.closePath();
-      ctx.fillStyle = "#fcbf49";
-      ctx.fill();
-
-      // Rear swept fins
+      // Fins
+      ctx.fillStyle = red;
       ctx.strokeStyle = dark;
       ctx.lineWidth = 1.2;
-      ctx.fillStyle = red;
 
-      // Top fin
       ctx.beginPath();
       ctx.moveTo(-5, -5);
       ctx.quadraticCurveTo(-14, -14, -20, -14);
@@ -196,7 +150,6 @@ function initTintinRockets() {
       ctx.fill();
       ctx.stroke();
 
-      // Bottom fin
       ctx.beginPath();
       ctx.moveTo(-5, 5);
       ctx.quadraticCurveTo(-14, 14, -20, 14);
@@ -205,18 +158,61 @@ function initTintinRockets() {
       ctx.fill();
       ctx.stroke();
 
-      // Center fin spine
-      ctx.beginPath();
-      ctx.moveTo(-4, 0);
-      ctx.lineTo(-20, 0);
-      ctx.strokeStyle = red;
-      ctx.lineWidth = 2.2;
-      ctx.stroke();
-
-      function fuselagePath() {
+      // Body
+      function bodyPath() {
         ctx.beginPath();
         ctx.moveTo(20, 0);
         ctx.bezierCurveTo(11, -8.5, -7, -8.5, -15, -3.5);
         ctx.lineTo(-15, 3.5);
         ctx.bezierCurveTo(-7, 8.5, 11, 8.5, 20, 0);
-        c
+        ctx.closePath();
+      }
+
+      ctx.save();
+      bodyPath();
+      ctx.clip();
+
+      ctx.fillStyle = white;
+      ctx.fillRect(-20, -12, 45, 24);
+
+      ctx.fillStyle = red;
+      ctx.fillRect(8, -12, 16, 24);
+      ctx.fillRect(-18, -12, 7, 24);
+
+      [-11, -4.5, 2].forEach((cx, idx) => {
+        ctx.fillStyle = idx % 2 === 0 ? red : white;
+        ctx.fillRect(cx, -9, 6.5, 9);
+        ctx.fillStyle = idx % 2 === 0 ? white : red;
+        ctx.fillRect(cx, 0, 6.5, 9);
+      });
+
+      ctx.restore();
+
+      bodyPath();
+      ctx.strokeStyle = dark;
+      ctx.lineWidth = 1.3;
+      ctx.stroke();
+
+      // Nose needle
+      ctx.beginPath();
+      ctx.moveTo(20, 0);
+      ctx.lineTo(26, 0);
+      ctx.stroke();
+
+      ctx.restore();
+    }
+  }
+
+  const rockets = [new Rocket(true), new Rocket(true), new Rocket(true)];
+
+  function loop() {
+    ctx.clearRect(0, 0, width, height);
+    rockets.forEach((r) => {
+      r.update();
+      r.draw(ctx);
+    });
+    requestAnimationFrame(loop);
+  }
+
+  loop();
+}
