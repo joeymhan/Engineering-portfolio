@@ -51,12 +51,13 @@ a:focus-visible, .btn:focus-visible {
 .brand {
   font-family: var(--display);
   font-weight: 800;
-  font-size: clamp(4rem, 11vw, 7.5rem);
+  font-size: clamp(4.5rem, 13vw, 9rem);
   line-height: 1;
   letter-spacing: -0.03em;
   color: var(--ink);
   text-decoration: none;
   text-align: center;
+  margin: 0;
 }
 
 .site-nav {
@@ -102,6 +103,7 @@ a:focus-visible, .btn:focus-visible {
   min-height: min(86vh, 760px);
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 4rem clamp(1.25rem, 5vw, 4rem);
   overflow: hidden;
 }
