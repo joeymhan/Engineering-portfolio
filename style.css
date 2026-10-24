@@ -5,8 +5,8 @@
   --line: #c9d4df;
   --accent: #1f5fbf;
   --gold: #b8963e;
-  --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
-  --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --display: "DM Sans", "Helvetica Neue", Arial, sans-serif;
+  --body: "DM Sans", "Helvetica Neue", Arial, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -29,7 +29,7 @@ body {
   color: var(--ink);
   font-family: var(--body);
   font-size: 1.125rem;
-  line-height: 1.65;
+  line-height: 1.6;
 }
 
 a { color: var(--accent); text-underline-offset: 3px; }
@@ -44,24 +44,27 @@ a:focus-visible, .btn:focus-visible {
   top: 0;
   z-index: 10;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  gap: 0.35rem;
   padding: 1rem clamp(1.25rem, 5vw, 4rem);
   background: color-mix(in srgb, var(--paper) 88%, transparent);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
+  text-align: center;
 }
 .brand {
   font-family: var(--display);
   font-weight: 800;
-  font-size: 1.15rem;
+  font-size: 1.6rem;
+  letter-spacing: -0.01em;
   color: var(--ink);
   text-decoration: none;
 }
-.site-header nav { display: flex; gap: 1.5rem; }
+.site-header nav { display: flex; justify-content: center; gap: 1.5rem; }
 .site-header nav a {
   font-family: var(--display);
-  font-weight: 400;
+  font-weight: 600;
   color: var(--muted);
   text-decoration: none;
 }
@@ -100,12 +103,6 @@ a:focus-visible, .btn:focus-visible {
 @keyframes show { to { opacity: 1; } }
 
 .hero-inner { position: relative; max-width: 40rem; }
-.kicker {
-  margin: 0 0 1rem;
-  font-family: var(--display);
-  color: var(--muted);
-  font-size: 1rem;
-}
 h1 {
   margin: 0;
   font-family: var(--display);
@@ -149,12 +146,6 @@ h2 {
   font-size: clamp(2rem, 5vw, 3rem);
   letter-spacing: -0.02em;
 }
-h3 {
-  margin: 0 0 0.4rem;
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 1.35rem;
-}
 .prose { max-width: 40rem; }
 .prose p { margin: 0 0 1rem; }
 
@@ -167,32 +158,34 @@ h3 {
 .facts dt { font-family: var(--display); color: var(--muted); font-size: 0.95rem; }
 .facts dd { margin: 0; font-weight: 600; }
 
-/* Projects */
-.projects { list-style: none; margin: 0; padding: 0; }
-.projects li {
-  display: grid;
-  gap: 0.25rem;
-  padding: 1.75rem 0;
-  border-top: 1px solid var(--line);
-  max-width: 40rem;
-}
-.projects li:first-child { border-top: 0; padding-top: 0; }
-.projects p { margin: 0 0 0.5rem; }
-
 /* Contact */
 .links { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: 0.4rem; }
 
+/* Footer */
 .site-footer {
   padding: 2rem clamp(1.25rem, 5vw, 4rem);
   border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: 0.95rem;
+  text-align: center;
 }
-.site-footer p { margin: 0 auto; max-width: 62rem; }
+.site-footer p { margin: 0; }
+.footer-links {
+  list-style: none;
+  margin: 0 0 0.75rem;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.footer-links a {
+  font-weight: 600;
+  color: var(--ink);
+}
+.footer-links a:hover { color: var(--accent); }
 
 /* Small screens */
 @media (max-width: 520px) {
-  .site-header nav { gap: 1rem; }
   .hero { min-height: 80vh; }
 }
 
