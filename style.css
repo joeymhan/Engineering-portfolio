@@ -60,7 +60,14 @@ a:focus-visible, .btn:focus-visible {
   grid-template-columns: minmax(280px, 34rem) 1fr;
   gap: 3rem;
   margin-top: 4rem;
+  padding-left: clamp(2rem, 8vw, 7rem);
   align-items: start;
+}
+
+.about-me h2 {
+  padding-bottom: 0.6rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--line);
 }
 
 .about-me p {
@@ -267,8 +274,4 @@ h3 {
 /* Footer */
 .site-footer {
   width: 100%;
-  padding: 2rem clamp(1.25rem, 5vw, 4rem);
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 0.95rem;
- 
+  padding: 2rem clamp(1.25rem, 5vw
